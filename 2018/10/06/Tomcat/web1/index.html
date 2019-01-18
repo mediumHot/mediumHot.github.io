@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -79,21 +79,26 @@
 
 
 
-<meta name="description" content="卡顿：每次保存web.xml文件eclipse卡顿到未响应程度原因： web-app引用的版本太高  解决: 将4.0-修改成3.1版本">
+<meta name="description" content="错误：如下  原因：没有引入tomcat的lebrary库 解决:  在ClassPath里面添加Library选择Severt runtime—&amp;gt;你的tomcat版本 解决后的效果">
 <meta name="keywords" content="Eclipse">
 <meta property="og:type" content="article">
-<meta property="og:title" content="web.xml一保存就卡">
-<meta property="og:url" content="http://yoursite.com/2018/10/06/web3/index.html">
+<meta property="og:title" content="web项目出现红X">
+<meta property="og:url" content="http://yoursite.com/2018/10/06/Tomcat/web1/index.html">
 <meta property="og:site_name" content="Golden Age">
-<meta property="og:description" content="卡顿：每次保存web.xml文件eclipse卡顿到未响应程度原因： web-app引用的版本太高  解决: 将4.0-修改成3.1版本">
+<meta property="og:description" content="错误：如下  原因：没有引入tomcat的lebrary库 解决:  在ClassPath里面添加Library选择Severt runtime—&amp;gt;你的tomcat版本 解决后的效果">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/10/06/web3/1_1.png">
-<meta property="og:image" content="http://yoursite.com/2018/10/06/web3/1_2.png">
-<meta property="og:updated_time" content="2018-10-06T09:10:29.602Z">
+<meta property="og:image" content="http://yoursite.com/2018/10/06/Tomcat/web1/1_1.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/06/Tomcat/web1/1_2.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/06/Tomcat/web1/1_3.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/06/Tomcat/web1/1_4.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/06/Tomcat/web1/1_5.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/06/Tomcat/web1/1_6.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/06/Tomcat/web1/1_7.png">
+<meta property="og:updated_time" content="2018-10-06T09:10:30.452Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="web.xml一保存就卡">
-<meta name="twitter:description" content="卡顿：每次保存web.xml文件eclipse卡顿到未响应程度原因： web-app引用的版本太高  解决: 将4.0-修改成3.1版本">
-<meta name="twitter:image" content="http://yoursite.com/2018/10/06/web3/1_1.png">
+<meta name="twitter:title" content="web项目出现红X">
+<meta name="twitter:description" content="错误：如下  原因：没有引入tomcat的lebrary库 解决:  在ClassPath里面添加Library选择Severt runtime—&amp;gt;你的tomcat版本 解决后的效果">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/06/Tomcat/web1/1_1.png">
 
 
 
@@ -101,7 +106,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Gemini',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -123,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/06/web3/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/06/Tomcat/web1/"/>
 
 
 
 
 
-  <title>web.xml一保存就卡 | Golden Age</title>
+  <title>web项目出现红X | Golden Age</title>
   
 
 
@@ -266,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/06/web3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/06/Tomcat/web1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Li Linjie">
@@ -283,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">web.xml一保存就卡</h1>
+          <h1 class="post-title" itemprop="name headline">web项目出现红X</h1>
         
 
         <div class="post-meta">
@@ -355,8 +360,11 @@
       
 
       
-        <h2 id="卡顿：每次保存web-xml文件eclipse卡顿到未响应程度"><a href="#卡顿：每次保存web-xml文件eclipse卡顿到未响应程度" class="headerlink" title="卡顿：每次保存web.xml文件eclipse卡顿到未响应程度"></a>卡顿：每次保存web.xml文件eclipse卡顿到未响应程度</h2><h2 id="原因：-web-app引用的版本太高"><a href="#原因：-web-app引用的版本太高" class="headerlink" title="原因： web-app引用的版本太高"></a>原因： web-app引用的版本太高</h2><p> <img src="/2018/10/06/web3/1_1.png" alt="avatar"></p>
-<h2 id="解决-将4-0-修改成3-1版本"><a href="#解决-将4-0-修改成3-1版本" class="headerlink" title="解决: 将4.0-修改成3.1版本"></a>解决: 将4.0-修改成3.1版本</h2><p> <img src="/2018/10/06/web3/1_2.png" alt="avatar"></p>
+        <h2 id="错误：如下"><a href="#错误：如下" class="headerlink" title="错误：如下"></a>错误：如下</h2><p><img src="/2018/10/06/Tomcat/web1/1_1.png" alt="avatar"></p>
+<p><img src="/2018/10/06/Tomcat/web1/1_2.png" alt="avatar"></p>
+<h2 id="原因：没有引入tomcat的lebrary库"><a href="#原因：没有引入tomcat的lebrary库" class="headerlink" title="原因：没有引入tomcat的lebrary库"></a>原因：没有引入tomcat的lebrary库</h2><p><img src="/2018/10/06/Tomcat/web1/1_3.png" alt="avatar"></p>
+<h2 id="解决-在ClassPath里面添加Library选择Severt-runtime—-gt-你的tomcat版本"><a href="#解决-在ClassPath里面添加Library选择Severt-runtime—-gt-你的tomcat版本" class="headerlink" title="解决:  在ClassPath里面添加Library选择Severt runtime—&gt;你的tomcat版本"></a>解决:  在ClassPath里面添加Library选择Severt runtime—&gt;你的tomcat版本</h2><p><img src="/2018/10/06/Tomcat/web1/1_4.png" alt="avatar"><br><img src="/2018/10/06/Tomcat/web1/1_5.png" alt="avatar"><br><img src="/2018/10/06/Tomcat/web1/1_6.png" alt="avatar"></p>
+<h1 id="解决后的效果"><a href="#解决后的效果" class="headerlink" title="解决后的效果"></a>解决后的效果</h1><p><img src="/2018/10/06/Tomcat/web1/1_7.png" alt="avatar"></p>
 
       
     </div>
@@ -387,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/06/web4/" rel="next" title="web.xml问题导致404 Not found">
-                <i class="fa fa-chevron-left"></i> web.xml问题导致404 Not found
+              <a href="/2018/10/06/Tomcat/web2/" rel="next" title="快捷键没有内容提示">
+                <i class="fa fa-chevron-left"></i> 快捷键没有内容提示
               </a>
             
           </div>
@@ -397,8 +405,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/06/web2/" rel="prev" title="快捷键没有内容提示">
-                快捷键没有内容提示 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/06/Main/" rel="prev" title="Main">
+                Main <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -466,7 +474,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">Li Linjie</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">别看着我啦</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -509,6 +517,40 @@
           
 
           
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yourname" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/your-user-name" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://douban.com/people/your-user-name" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+            </div>
+          
 
           
           
@@ -531,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#卡顿：每次保存web-xml文件eclipse卡顿到未响应程度"><span class="nav-number">1.</span> <span class="nav-text">卡顿：每次保存web.xml文件eclipse卡顿到未响应程度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因：-web-app引用的版本太高"><span class="nav-number">2.</span> <span class="nav-text">原因： web-app引用的版本太高</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决-将4-0-修改成3-1版本"><span class="nav-number">3.</span> <span class="nav-text">解决: 将4.0-修改成3.1版本</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#错误：如下"><span class="nav-number">1.</span> <span class="nav-text">错误：如下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因：没有引入tomcat的lebrary库"><span class="nav-number">2.</span> <span class="nav-text">原因：没有引入tomcat的lebrary库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决-在ClassPath里面添加Library选择Severt-runtime—-gt-你的tomcat版本"><span class="nav-number">3.</span> <span class="nav-text">解决:  在ClassPath里面添加Library选择Severt runtime—&gt;你的tomcat版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决后的效果"><span class="nav-number"></span> <span class="nav-text">解决后的效果</span></a></div>
             
 
           </div>
@@ -551,7 +593,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -569,7 +611,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
@@ -668,6 +710,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
