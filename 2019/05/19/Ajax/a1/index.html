@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Ajax," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="三级联动步骤1.    数据库设计省市县三级区域建一张表即可        通过建立上下级关系，自关联        地区ID–aredid  地区名称—areanema  上级市—parenid 城市—city 2.    准备素材a)    一个数据库表，一个工具类，一个Dao类，一个Servlet，一个页面 数据库表  CREATE TABLE `area` (   `areaid` int">
+<meta name="keywords" content="Ajax">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Ajax实现一个简单的三级联动菜单">
+<meta property="og:url" content="http://yoursite.com/blog/2019/05/19/Ajax/a1/index.html">
+<meta property="og:site_name" content="Golden Age">
+<meta property="og:description" content="三级联动步骤1.    数据库设计省市县三级区域建一张表即可        通过建立上下级关系，自关联        地区ID–aredid  地区名称—areanema  上级市—parenid 城市—city 2.    准备素材a)    一个数据库表，一个工具类，一个Dao类，一个Servlet，一个页面 数据库表  CREATE TABLE `area` (   `areaid` int">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-19T09:22:27.989Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Ajax实现一个简单的三级联动菜单">
+<meta name="twitter:description" content="三级联动步骤1.    数据库设计省市县三级区域建一张表即可        通过建立上下级关系，自关联        地区ID–aredid  地区名称—areanema  上级市—parenid 城市—city 2.    准备素材a)    一个数据库表，一个工具类，一个Dao类，一个Servlet，一个页面 数据库表  CREATE TABLE `area` (   `areaid` int">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/blog/2019/05/19/Ajax/a1/"/>
+
+
+
+
+
+  <title>使用Ajax实现一个简单的三级联动菜单 | Golden Age</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Golden Age</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">黄金时代</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read">
+          <a href="/blog/categories/read" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            read
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog/blog/2019/05/19/Ajax/a1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李霖杰">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Golden Age">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用Ajax实现一个简单的三级联动菜单</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-19T15:33:13+08:00">
+                2019-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="三级联动步骤"><a href="#三级联动步骤" class="headerlink" title="三级联动步骤"></a>三级联动步骤</h1><h2 id="1-数据库设计"><a href="#1-数据库设计" class="headerlink" title="1.    数据库设计"></a>1.    数据库设计</h2><p>省市县三级区域建一张表即可<br>        通过建立上下级关系，自关联<br>        地区ID–aredid  地区名称—areanema  上级市—parenid 城市—city</p>
+<h2 id="2-准备素材"><a href="#2-准备素材" class="headerlink" title="2.    准备素材"></a>2.    准备素材</h2><p>a)    一个数据库表，一个工具类，一个Dao类，一个Servlet，一个页面</p>
+<p>数据库表</p>
+<pre><code> CREATE TABLE `area` (
+  `areaid` int(8) NOT NULL,
+  `areaname` varchar(20) NOT NULL,
+  `parentid` int(8) NOT NULL,
+  `city` varchar(20) NOT NULL,
+  `arealevel` int(3) NOT NULL,
+  `county` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+</code></pre><p>数据库记录</p>
+<pre><code>见底下下载链接这给出部分示例数据
+INSERT INTO `area` VALUES (&apos;110000&apos;, &apos;北京&apos;, &apos;0&apos;, &apos;北京&apos;, &apos;1&apos;, &apos;1&apos;);
+INSERT INTO `area` VALUES (&apos;110100&apos;, &apos;北京市&apos;, &apos;110000&apos;, &apos;北京&apos;, &apos;2&apos;, &apos;1&apos;);
+INSERT INTO `area` VALUES (&apos;110101&apos;, &apos;东城区&apos;, &apos;110100&apos;, &apos;东城&apos;, &apos;3&apos;, &apos;3&apos;);
+INSERT INTO `area` VALUES (&apos;110102&apos;, &apos;西城区&apos;, &apos;110100&apos;, &apos;西城&apos;, &apos;3&apos;, &apos;15&apos;);
+INSERT INTO `area` VALUES (&apos;110105&apos;, &apos;朝阳区&apos;, &apos;110100&apos;, &apos;朝阳&apos;, &apos;3&apos;, &apos;2&apos;);
+INSERT INTO `area` VALUES (&apos;110106&apos;, &apos;丰台区&apos;, &apos;110100&apos;, &apos;丰台&apos;, &apos;3&apos;, &apos;6&apos;);
+INSERT INTO `area` VALUES (&apos;110107&apos;, &apos;石景山区&apos;, &apos;110100&apos;, &apos;石景山&apos;, &apos;3&apos;, &apos;12&apos;);
+INSERT INTO `area` VALUES (&apos;110108&apos;, &apos;海淀区&apos;, &apos;110100&apos;, &apos;海淀&apos;, &apos;3&apos;, &apos;7&apos;);
+INSERT INTO `area` VALUES (&apos;110109&apos;, &apos;门头沟区&apos;, &apos;110100&apos;, &apos;门头沟&apos;, &apos;3&apos;, &apos;9&apos;);
+INSERT INTO `area` VALUES (&apos;110111&apos;, &apos;房山区&apos;, &apos;110100&apos;, &apos;房山&apos;, &apos;3&apos;, &apos;5&apos;);
+INSERT INTO `area` VALUES (&apos;110112&apos;, &apos;通州区&apos;, &apos;110100&apos;, &apos;通州&apos;, &apos;3&apos;, &apos;14&apos;);
+INSERT INTO `area` VALUES (&apos;110113&apos;, &apos;顺义区&apos;, &apos;110100&apos;, &apos;顺义&apos;, &apos;3&apos;, &apos;13&apos;);
+INSERT INTO `area` VALUES (&apos;110114&apos;, &apos;昌平区&apos;, &apos;110100&apos;, &apos;昌平&apos;, &apos;3&apos;, &apos;1&apos;);
+</code></pre><p>工具类</p>
+<pre><code>public class BaseDao {
+    private Connection conn;
+    private PreparedStatement ps;
+    private ResultSet rs;
+    /**
+     *获得连接
+     */
+    private void getConnection() {
+        try {
+            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+            String url=&quot;jdbc:mysql://localhost:3306/cn_area&quot;;
+            String user=&quot;root&quot;;
+            String password=&quot;123&quot;;
+            conn = DriverManager.getConnection(url, user, password);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //关闭
+    /**
+     * 关闭
+     */
+    public void close() {
+        if(rs!=null)
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        if(ps!=null)
+            try {
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        if(conn!=null)
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    }
+
+
+    //更新--增加--修改--删除
+    //insert into book(name,price,author,pudate) values(?,?,?,?)
+    /**
+     * 更新
+     * @param sql    要执行的sql语句
+     * @param objects    参数列表
+     * @return
+     */
+    public int executeUpdate(String sql,Object...objects) {
+        try {
+            this.getConnection();
+            ps=conn.prepareStatement(sql);
+            if(objects!=null) {    //设置参数
+                for (int i = 0; i &lt; objects.length; i++) {
+                    ps.setObject(i+1,objects[i]);
+                }
+            }
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            this.close();
+        }
+        return -1;      //catch 返回-1，try则不执行
+    }
+
+    //查询
+    /**
+     * 查询--记得关闭连接
+     * 查询有ResultSet返回需要你自己手动关闭
+     * @param sql
+     * @param objects
+     * @return
+     */
+    public ResultSet executeQuert(String sql,Object...objects) {
+        try {
+            this.getConnection();
+            ps=conn.prepareStatement(sql);
+            if(objects!=null) {    //设置参数
+                for (int i = 0; i &lt; objects.length; i++) {
+                    ps.setObject(i+1,objects[i]);
+                }
+            }
+            return  rs = ps.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}
+</code></pre><p>Dao类</p>
+<pre><code>  public class AreaDao extends BaseDao{
+    //查询地区
+    public List&lt;Area&gt; getAll(int parentid){
+        List&lt;Area&gt; list = new ArrayList&lt;Area&gt;();
+        String sql=&quot;select * from area where parentid = ?&quot;;
+        try {    
+            ResultSet rs = this.executeQuert(sql,parentid);
+            while(rs.next()){
+                list.add(new Area(rs.getInt(&quot;areaId&quot;),rs.getString(&quot;areaName&quot;),rs.getInt(&quot;parentId&quot;)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            this.close();
+        }
+        return list;
+    }
+
+}
+</code></pre><p>Servlet类</p>
+<pre><code> @WebServlet(name = &quot;area&quot;, urlPatterns = { &quot;/area&quot; })
+public class AreaServlet extends HttpServlet {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //1.获取父id
+        int parentid = Integer.parseInt(request.getParameter(&quot;parentId&quot;));
+        //2.根据父id查询指定的area信息
+        AreaDao areaDao = new AreaDao();
+        List&lt;Area&gt; areaList = areaDao.getAll(parentid);
+        //3.返回指定的area信息(JSON 格式字符串)
+        response.setContentType(&quot;test/html;charset=utf-8&quot;);
+        response.getWriter().println(new Gson().toJson(areaList));
+    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
+}
+</code></pre><p>页面</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+    pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+
+&lt;style type=&quot;text/css&quot;&gt;
+    select{
+        width:300px;
+        height:30px;
+    }
+    #showdiv{
+        width:920px;
+        margin:auto;
+        margin-top:200px;
+    }
+&lt;/style&gt;
+
+    &lt;script type=&quot;text/javascript&quot; src=&quot;/Ajax_18_11_26/js/jquery-3.3.1.min.js&quot;&gt;
+    &lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        //页面加载完成后加载所有系统的省级行政区
+        $(function(){
+            $.ajax({
+                url:&quot;area?parentId=0&quot;,
+                datatype:&apos;text&apos;,
+                success:function(data){
+                    eval(&quot;data = &quot;+data);
+                    //写入指定位置
+                    var str=&quot;&quot;;
+                    for(var i=0;i&lt;data.length;i++){
+                        str+=&quot;&lt;option value=&apos;&quot;+data[i].areaId+&quot;&apos;&gt;&quot;+data[i].areaName+&quot;&lt;/option&gt;&quot;;
+                    }
+                    $(&quot;#province&quot;).html(str);
+                    getCity();
+                }
+            });
+
+        });
+
+        function getCity() {
+            var parentId = $(&quot;#province&quot;).val();
+            $.ajax({
+                //获取市区的id
+                url:&quot;area?parentId=&quot;+parentId,
+                datatype:&apos;text&apos;,
+                success:function(data){
+                    eval(&quot;data = &quot;+data);
+                    //写入指定位置
+                    var str=&quot;&quot;;
+                    for(var i=0;i&lt;data.length;i++){
+                        str+=&quot;&lt;option value=&apos;&quot;+data[i].areaId+&quot;&apos;&gt;&quot;+data[i].areaName+&quot;&lt;/option&gt;&quot;;
+                    }
+                    $(&quot;#city&quot;).html(str);
+                    getCounty();
+                }
+            });
+        }
+
+        function getCounty() {
+            var parentId = $(&quot;#city&quot;).val();
+            $.ajax({
+                //获取城市的id
+                url:&quot;area&quot;,
+                data:{&quot;parentId&quot;:parentId},
+                datatype:&apos;text&apos;,
+                success:function(data){
+                    eval(&quot;data = &quot;+data);
+                    //写入指定位置
+                    var str=&quot;&quot;;
+                    for(var i=0;i&lt;data.length;i++){
+                        str+=&quot;&lt;option value=&apos;&quot;+data[i].areaId+&quot;&apos;&gt;&quot;+data[i].areaName+&quot;&lt;/option&gt;&quot;;
+                    }
+                    $(&quot;#county&quot;).html(str);
+                }
+            });
+        }
+    &lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&quot;showdiv&quot;&gt;
+        &lt;select name=&quot;province&quot; id=&quot;province&quot; onchange=&quot;getCity();&quot;&gt;
+        &lt;/select&gt;
+        &lt;select name=&quot;city&quot; id=&quot;city&quot; onchange=&quot;getCounty();&quot;&gt;&lt;/select&gt;
+        &lt;select name=&quot;county&quot; id=&quot;county&quot; &gt;&lt;/select&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>b)    添加jar:数据库驱动 Gson</p>
+<p>c)    添加Jquery</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/Ajax/" rel="tag"># Ajax</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2019/01/18/Spring_Mvc/SpringMvc-5/" rel="next" title="SpringMvc @ResponseBody注解的作用">
+                <i class="fa fa-chevron-left"></i> SpringMvc @ResponseBody注解的作用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">李霖杰</p>
+              <p class="site-description motion-element" itemprop="description">别看着我啦</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/blog/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yourname" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yourname@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/your-user-name" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://douban.com/people/your-user-name" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://www.zhihu.com/people/your-user-name" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#三级联动步骤"><span class="nav-number">1.</span> <span class="nav-text">三级联动步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-数据库设计"><span class="nav-number">1.1.</span> <span class="nav-text">1.    数据库设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-准备素材"><span class="nav-number">1.2.</span> <span class="nav-text">2.    准备素材</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李霖杰</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
